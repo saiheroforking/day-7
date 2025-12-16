@@ -18,7 +18,7 @@ A simple React application demonstrating **theme switching**, **data fetching fr
 Add your screenshot(s) to the repository and reference them here. Example:
 
 ```markdown
-![App Screenshot](./asserts/image.png)
+![Project Screenshot](./asserts/image.png)
 ```
 
 > Replace `./screenshots/screenshot.png` with the path to your actual image file(s).

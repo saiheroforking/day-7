@@ -1,0 +1,62 @@
+.app {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #f0f0f0;
+  color: #333;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.app.light {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.app.dark {
+  background-color: #333;
+  color: #f0f0f0;
+}
+
+h1,
+h3 {
+  margin: 10px 0;
+  text-align: center;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 10px 0 20px 0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+pre {
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 15px;
+  border-radius: 5px;
+  max-width: 600px;
+  overflow-x: auto;
+  text-align: left;
+  /* keep JSON readable */
+}
+
+
+.child-component {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 600px;
+}

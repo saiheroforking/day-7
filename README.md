@@ -1,70 +1,159 @@
-# Getting Started with Create React App
+# React Theme & Data Fetch App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simple React application demonstrating **theme switching**, **data fetching from an API**, and **error handling** using an `ErrorBoundary` component.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+* **Theme Toggle:** Switch between light and dark mode using React Context.
+* **API Data Fetching:** Fetch data from a backend API and display it in JSON format.
+* **Error Handling:** Wrap components with `ErrorBoundary` to catch and display runtime errors.
+* **React Context:** Share the theme across components using `ThemeContext`.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Demo Screenshot
 
-### `npm test`
+Add your screenshot(s) to the repository and reference them here. Example:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```markdown
+![App Screenshot](./asserts/image.png)
+```
 
-### `npm run build`
+> Replace `./screenshots/screenshot.png` with the path to your actual image file(s).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **Clone the repository**
 
-### `npm run eject`
+```bash
+git clone https://github.com/saiheroforking/day-7.git
+cd day-7
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. **Install dependencies**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm install
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. **Start the development server**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm start
+```
 
-## Learn More
+Open `http://localhost:3000` in your browser.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+> ⚠️ If your app depends on a backend API, make sure the backend is running and the `fetch` URL in `src/App.js` points to a reachable endpoint (not `127.0.0.1` after deploying to GitHub Pages).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## Deployment (GitHub Pages)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+This project includes a `gh-pages` deployment setup in `package.json`. To deploy:
 
-### Analyzing the Bundle Size
+```bash
+npm run build
+npm run deploy
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Your app will be available at: `https://<your-github-username>.github.io/<your-repo-name>`
 
-### Making a Progressive Web App
+**Important:** GitHub Pages is a static host — it cannot reach an API running on your local machine. If your app needs server data in production, deploy the backend to a public host (Render, Railway, Heroku, Vercel, etc.) and update the `fetch` URL accordingly.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## Scripts (from `package.json`)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+* `npm start` — run the app in development mode
+* `npm run build` — build the app for production
+* `npm run deploy` — build + deploy to GitHub Pages (requires `gh-pages` devDependency)
+* `npm test` — run tests
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## File Structure
 
-### `npm run build` fails to minify
+```
+day-7/
+├── public/
+├── src/
+│   ├── App.js
+│   ├── App.css
+│   ├── ChildComponent.js
+│   ├── ErrorBoundary.js
+│   └── index.js
+├── package.json
+└── README.md
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## How it works (brief)
+
+* `App.js`:
+
+  * Manages theme state (`light` / `dark`) using `useState`.
+  * Fetches API data using `useEffect` and saves it to state with `setData`.
+  * Provides `ThemeContext` to child components.
+* `ChildComponent.js`:
+
+  * Consumes `ThemeContext` to adjust its styles based on the theme.
+* `ErrorBoundary.js`:
+
+  * Catches JavaScript errors in its child component tree and renders a fallback UI.
+
+---
+
+## Example: Updating the API URL
+
+If you deploy your backend, update the fetch call in `src/App.js`:
+
+```js
+useEffect(() => {
+  fetch("https://your-deployed-backend.com/api/python/")
+    .then(res => res.json())
+    .then(data => setData(data))
+    .catch(error => console.error("Error fetching data:", error));
+}, []);
+```
+
+If you don’t have a backend, you can mock data locally:
+
+```js
+useEffect(() => {
+  const mock = { id: 1, name: "Demo" };
+  setData(mock);
+}, []);
+```
+
+---
+
+## Screenshots (suggested structure)
+
+Create a `screenshots/` folder in the repo and add:
+
+* `screenshots/screenshot-light.png` — light-theme view
+* `screenshots/screenshot-dark.png` — dark-theme view
+
+Then reference them in this README.
+
+---
+
+## Contributing
+
+Feel free to open issues or submit pull requests. If you add features, please update this README with instructions and screenshots.
+
+---
+
+## License
+
+This project is open-source and free to use.
+
+---
+
+*Generated for the `React Theme & Data Fetch App` project.*

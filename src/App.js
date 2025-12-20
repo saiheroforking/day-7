@@ -4,7 +4,6 @@ import ErrorBoundary from "./ErrorBoundary";
 import "./App.css";
 
 export const ThemeContext = createContext();
-
 function App() {
   const [theme, setTheme] = useState("light");
   const [data, setData] = useState();
@@ -35,5 +34,4 @@ return (
   </div>
 );
 }
-
 export default App;
